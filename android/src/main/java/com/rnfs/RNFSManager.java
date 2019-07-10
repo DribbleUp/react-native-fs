@@ -300,10 +300,7 @@ public class RNFSManager extends ReactContextBaseJavaModule {
   }
 
   private int getResIdentifier(String filename) {
-    String suffix = filename.substring(filename.lastIndexOf(".") + 1);
-    String name = filename.substring(0, filename.lastIndexOf("."));
-    Boolean isImage = suffix.equals("png") || suffix.equals("jpg") || suffix.equals("jpeg") || suffix.equals("bmp") || suffix.equals("gif") || suffix.equals("webp") || suffix.equals("psd") || suffix.equals("svg") || suffix.equals("tiff");
-    return getReactApplicationContext().getResources().getIdentifier(name, isImage ? "drawable" : "raw", getReactApplicationContext().getPackageName());
+     return getReactApplicationContext().getResources().getIdentifier(filename, "raw", getReactApplicationContext().getPackageName());
   }
 
   @ReactMethod
@@ -975,26 +972,6 @@ public class RNFSManager extends ReactContextBaseJavaModule {
     }
 
     return constants;
-  }
-
-
-    @ReactMethod
-  public void existsRes(String filename, Promise promise) {
-    try {
-      int res = getResIdentifier(filename);
-      if (res > 0) {
-        promise.resolve(true);
-      } else {
-        promise.resolve(false);
-      }
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      reject(promise, filename, ex);
-    }
-  }
-
-  private int getResIdentifier(String filename) {
-     return getReactApplicationContext().getResources().getIdentifier(filename, "raw", getReactApplicationContext().getPackageName());
   }
 
 }
