@@ -224,14 +224,6 @@ var RNFS = {
     return RNFSManager.exists(normalizeFilePath(filepath));
   },
 
-    // Android-only
-    existsRes(filename: string) {
-        if (!RNFSManager.existsRes) {
-            throw new Error('existsRes is not available on this platform');
-        }
-        return RNFSManager.existsRes(filename);
-        },
-
   stopDownload(jobId: number): void {
     RNFSManager.stopDownload(jobId);
   },
